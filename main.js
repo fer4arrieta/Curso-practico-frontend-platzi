@@ -2,13 +2,16 @@ const menuemail = document.querySelector(".navbar-email");
 const desktopmenu = document.querySelector(".desktop-menu");
 const menuhamicon = document.querySelector(".menu");
 const menucarritoicon = document.querySelector(".navbar-shopping-cart");
+const productdetailcloseicon = document.querySelector(".product-detail-close");
 const mobilemenu = document.querySelector(".mobile-menu");
 const shoppingcartcontainer = document.querySelector("#shoppingcartcontainer");
+const productdetailcontainer = document.querySelector("#productdetail");
 const cardscontainer = document.querySelector(".cards-container");
 
 menuemail.addEventListener('click', toggledesktopmenu);
 menuhamicon.addEventListener('click', togglemobilemenu);
 menucarritoicon.addEventListener('click', toggleCarritoshoppingcartcontainer);
+productdetailcloseicon.addEventListener('click', closeproductdetailasaid);
 
 function toggledesktopmenu() {
     const isshoppingcartcontainerclose = shoppingcartcontainer.classList.contains("inactive");
@@ -25,6 +28,8 @@ function togglemobilemenu () {
     if (!isshoppingcartcontainerclose) {
         shoppingcartcontainer.classList.add("inactive")
     }
+
+    closeproductdetailasaid();
     mobilemenu.classList.toggle("inactive");
 }
 
@@ -34,6 +39,14 @@ function toggleCarritoshoppingcartcontainer () {
     if (!ismobilemenuclose) {
         mobilemenu.classList.add("inactive")
     }
+
+    const isproductdetailclose = productdetailcontainer.classList.contains("inactive");
+
+    if (!isproductdetailclose) {
+        productdetailcontainer.classList.add("inactive")
+    }
+
+
     const ismobiledesktopmenuclose = desktopmenu.classList.contains("inactive");
 
     if (!ismobiledesktopmenuclose) {
@@ -41,6 +54,16 @@ function toggleCarritoshoppingcartcontainer () {
     }
     shoppingcartcontainer.classList.toggle ("inactive");
 }
+
+function openproductdetailasaid() {
+    shoppingcartcontainer.classList.add('inactive')
+    productdetailcontainer.classList.remove('inactive')
+}
+
+function closeproductdetailasaid () {
+    productdetailcontainer.classList.add('inactive')
+}
+
 
 const productlist = [];
 productlist.push({
@@ -81,6 +104,7 @@ for (product of productlist) {
 
     const productimg = document.createElement("img");
     productimg.setAttribute('src',product.Image);
+    productimg.addEventListener('click',openproductdetailasaid)
 
     const productinfo =  document.createElement("div");
     productinfo.classList.add("product-info");
